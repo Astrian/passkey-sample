@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "DEBUG=webgest:* NODE_ENV=dev nodemon",
+    "start": "DEBUG=webgest:* NODE_ENV=prod pm2 start dist/app.js --name webgest",
+    "stop": "pm2 stop webgest && pm2 delete webgest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "argon2": "^0.40.1",
+    "debug": "^4.3.4",
+    "dotenv": "^16.4.5",
+    "koa": "^2.15.2",
+    "koa-body": "^6.0.1",
+    "koa-router": "^12.0.1",
+    "mariadb": "^3.3.0",
+    "typescript": "^5.4.4",
+    "useragent": "^2.3.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@koa/cors": "^5.0.0",
+    "@simplewebauthn/server": "^9.0.3",
+    "@types/debug": "^4.1.12",
+    "@types/koa": "^2.15.0",
+    "@types/koa__cors": "^5.0.0",
+    "@types/koa-router": "^7.4.8",
+    "@types/node-jose": "^1.1.13",
+    "@types/useragent": "^2.3.4",
+    "@types/uuid": "^9.0.8",
+    "nodemon": "^3.1.0",
+    "pm2": "^5.3.1",
+    "ts-node": "^10.9.2",
+    "tsc": "^2.0.4"
+  }
+}
