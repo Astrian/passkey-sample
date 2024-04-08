@@ -2,12 +2,31 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import moment from 'moment'
 import { startRegistration } from '@simplewebauthn/browser'
+import style from './user.module.scss'
 
 function User(props: {user: {username: string} | null}) {
   const [passkeys, setPasskeys] = useState([])
   useEffect(() => {
     refreshPasskeys()
   }, [])
+
+  function listPasskeys() {
+    return (<>
+      { passkeys.map((passkey: { id: string, created_at: string, updated_at: string, annotate: string }) => {
+        return (<div className={style.passkeyitem} key={passkey.id}>
+          <div className={style.left}>
+            <div className={style.passkeyname}>{passkey.annotate || "Passkey"}</div>
+            <div className={style.info}>Created at {moment(passkey.created_at).fromNow()}</div>
+            <div className={style.info}>Last used at {moment(passkey.updated_at).fromNow()}</div>
+          </div>
+          <div className={style.right}>
+            <button onClick={() => revokePasskey(passkey.id)}>Revoke</button>
+            <button onClick={() => changeAnnotate(passkey.id)}>Change annotate</button>
+          </div>
+        </div>)
+      }) }
+    </>)
+  }
 
   function refreshPasskeys() {
     axios.get(`https://${import.meta.env.VITE_BACKEND}/users/me/passkeys`, {
@@ -93,37 +112,29 @@ function User(props: {user: {username: string} | null}) {
       alert('Error: ' + e)
     }
   }
+
+
   
   return(<>
-    <h1>Welcome, {props.user?.username}</h1>
-    <hr />
-    <h2>Passkeys</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Annotate</th>
-          <th>Created at</th>
-          <th>Last used</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {passkeys.map((passkey: {id: string, created_at: Date, updated_at: Date, annotate: string}) => {
-          return(<tr key={passkey.id}>
-            <td>{passkey.annotate || "Passkey"}</td>
-            <td>{moment(passkey.created_at).fromNow()}</td>
-            <td>{moment(passkey.updated_at).fromNow()}</td>
-            <td>
-              <button onClick={() => revokePasskey(passkey.id)}>Revoke</button>
-              <button onClick={() => changeAnnotate(passkey.id)}>Change annotate</button>
-            </td>
-          </tr>)
-        })}
-      </tbody>
-    </table>
-    <button onClick={assignPasskey}>Assign a new passkey</button>
-    <hr/>
-    <button onClick={() => logout()}>Logout</button>
+    <div className={style.navbar}>
+      <div className={`container ${style.navbarcontent}`}>
+        <div className={style.websitename}>
+          Try Passkey
+        </div>
+        <div className={style.right}>{props.user?.username} · <button onClick={logout}>Log out</button></div>
+      </div>
+    </div>  
+    <div className={style.body}>
+      <div className="container">
+        <div className={style.section}>
+          <div className={style.sectiontitle}>
+            <h2>My passkeys</h2>
+            <button onClick={assignPasskey}>Assign new passkey</button>
+          </div>
+            {listPasskeys()}
+        </div>
+      </div>
+    </div>
   </>)
 }
 

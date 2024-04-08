@@ -1,0 +1,71 @@
+.navbar {
+  height: 60px;
+  background: linear-gradient(to top right, rgba(34, 224, 183, 1), rgba(55, 152, 208, 1));
+  color: white;
+  display: flex;
+  align-items: center;
+  .navbarcontent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .websitename {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .right {
+      font-size: 18px;
+    }
+    button {
+      border: none;
+      background: none;
+      // remove all caps
+      text-transform: none;
+      letter-spacing: normal;
+      font-size: 18px;
+      color: white;
+      padding: 0px;
+    }
+  }
+}
+
+.body {
+  min-height: 90vh;
+  .section {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 20px;
+    .sectiontitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      h2{
+        font-size: 30px;
+      }
+    }
+  }
+}
+
+.passkeyitem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  .left{
+    .passkeyname {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .info {
+      font-size: 18px;
+    }
+  }
+  .right {
+    display: flex;
+    gap: 10px;
+  }
+}
+.passkeyitem:last-child {
+  border-bottom: none;
+}
