@@ -82,11 +82,20 @@
         text-transform: uppercase;
         letter-spacing: 2px;
       }
+      input {
+        font-size: 25px;
+      }
       .annotate {
         font-size: 15px;
         color: #565656;
         text-align: center;
         margin-top: 10px;
+        p {
+          margin: 5px 0px;
+        }
+      }
+      .annotate>:last-child {
+        margin-bottom: 0px;
       }
     }
   }

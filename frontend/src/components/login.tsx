@@ -168,7 +168,10 @@ function Login(props: {refreshLogin: () => any}) {
                     { /* pattern: a-z, 0-9 and period character */}
                     <input type='text' placeholder='username' value={username} onChange={usernameInput} disabled={processing} pattern='[a-z0-9\.]+'/>
                     <button disabled={username.length < 4 || processing} onClick={register}>Create Account</button>
-                    <div className={styles.annotate}>Use your browser profile, FIDO USB key, phone or supported password manager to create your account.</div>
+                    <div className={styles.annotate}>
+                      <p>Use your browser profile, FIDO USB key, phone or supported password manager to create your account.</p>
+                      <p>Only lowercase letters, numbers and period are vaild.</p>
+                    </div>
                   </div>
                 </>) : (<>
                   <div className={styles.form}>
