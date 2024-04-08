@@ -60,7 +60,14 @@ function Login(props: {refreshLogin: () => any}) {
     setProcessing(false)
   }
   async function usernameInput(e: React.ChangeEvent<HTMLInputElement>) {
-    setUsername(e.target.value.toLowerCase())
+    let input = e.target.value
+    if (input.length > 24) return
+    input = input.toLowerCase()
+    // [a-z|0-9|\.]{4, 24}
+    if (!/^[a-z0-9\.]{0,24}$/.test(input)) return
+    // only characters can be the first character
+    if (input.length > 0 && !/^[a-z]/.test(input)) return
+    setUsername(input)
   }
   async function login () {
     setProcessing(true)
