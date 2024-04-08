@@ -4,13 +4,17 @@ import mariadb from '../../../utils/mariadb'
 const debug = Debug("webgest:versions/latest/functions/logout.ts")
 
 export default async (session: string, uid: string) => {
-  // db
-  const pool = await mariadb()
-  const conn = await pool.getConnection()
+  let conn
+  try {
+    // db
+    const pool = await mariadb()
+    conn = await pool.getConnection()
 
-  // Delete the session
-  await conn.query('DELETE FROM sessions WHERE id = ? AND user = ?', [session, uid])
-  
-  
-  if (conn) conn.release()
+    // Delete the session
+    await conn.query('DELETE FROM sessions WHERE id = ? AND user = ?', [session, uid])
+  } catch (error) {
+    throw error
+  } finally {
+    if (conn) await conn.release()
+  }
 }

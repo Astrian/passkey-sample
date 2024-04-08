@@ -6,41 +6,35 @@ import argon2 from "argon2"
 const debug = Debug("webgest:versions/latest/functions/getSessionInfo.ts")
 
 export default async (authenticationInfo: string) => {
-  // Basic auth header
-  if (!authenticationInfo.startsWith("Basic ")) {
-    throw new HttpErrorRes("Unauthorized access", 403)
-  }
-  // split auth info with :
-  const auth = Buffer.from(authenticationInfo.split(" ")[1], 'base64').toString('utf-8').split(":")
-  const session = auth[0]
-  const token = auth[1]
+  let conn
+  try {
+    // Basic auth header
+    if (!authenticationInfo.startsWith("Basic ")) throw new HttpErrorRes("Unauthorized access", 403)
+    // split auth info with :
+    const auth = Buffer.from(authenticationInfo.split(" ")[1], 'base64').toString('utf-8').split(":")
+    const session = auth[0]
+    const token = auth[1]
 
-  // db
-  const pool = await mariadb()
-  const conn = await pool.getConnection()
+    // db
+    const pool = await mariadb()
+    conn = await pool.getConnection()
 
-  // find the session
-  const rows = await conn.query('SELECT * FROM sessions WHERE id = ?', [session])
-  if (rows.length === 0) {
-    
-    if (conn) conn.release()
-    throw new HttpErrorRes("Unauthorized access", 403)
-  }
+    // find the session
+    const rows = await conn.query('SELECT * FROM sessions WHERE id = ?', [session])
+    if (rows.length === 0) throw new HttpErrorRes("Unauthorized access", 403)
 
-  // find the user
-  const user = await conn.query('SELECT * FROM users WHERE id = ?', [rows[0].user])
+    // find the user
+    const user = await conn.query('SELECT * FROM users WHERE id = ?', [rows[0].user])
 
-  // check if token is correct, compare with hash
-  if (!await argon2.verify(rows[0].token, token)) {
-    
-    if (conn) conn.release()
-    throw new HttpErrorRes("Unauthorized access", 403)
-  }
-  
-  if (conn) conn.release()
-
-  return {
-    username: user[0].username,
-    uid: user[0].id
+    // check if token is correct, compare with hash
+    if (!await argon2.verify(rows[0].token, token)) throw new HttpErrorRes("Unauthorized access", 403)
+    return {
+      username: user[0].username,
+      uid: user[0].id
+    }
+  } catch (error) {
+    throw error
+  } finally {
+    if (conn) await conn.release()
   }
 }
