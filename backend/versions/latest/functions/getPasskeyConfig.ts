@@ -13,7 +13,7 @@ export default async (uid: string) => {
   // Get username
   const rows = await conn.query('SELECT * FROM users WHERE id = ?', [uid])
   if (rows.length === 0) {
-    await conn.end()
+    
     if (conn) conn.release()
     throw new HttpErrorRes("User not found", 404)
   }
@@ -43,7 +43,7 @@ export default async (uid: string) => {
   const uuidChallenge = uuid.v4()
   await conn.query('INSERT INTO challenges (id, challenge,time) VALUES (?, ?, ?)', [uuidChallenge, challenge, new Date()])
 
-  await conn.end()
+  
   if (conn) conn.release()
 
   return {

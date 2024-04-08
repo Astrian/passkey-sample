@@ -16,7 +16,7 @@ export default async (username: string) => {
   // Check username availability
   const rows = await conn.query('SELECT * FROM users WHERE username = ?', [username])
   if (rows.length > 0 && rows[0].status === 1) {
-    await conn.end()
+    
     if (conn) conn.release()
     throw new HttpErrorRes("Username not available", 400)
   }
@@ -40,7 +40,7 @@ export default async (username: string) => {
   if (rows.length !== 0) await conn.query('DELETE FROM users WHERE username = ? AND status = 0', [username])
   await conn.query('INSERT INTO users (id, username, email, status) VALUES (?, ?, ?, ?)', [uid, username, null, 0])
   
-  await conn.end()
+  
   if (conn) conn.release()
 
   return {

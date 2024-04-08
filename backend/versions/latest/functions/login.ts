@@ -22,7 +22,7 @@ export default async (challengeId: string, credential: WebauthnCred, userAgentSt
   // get expected challenge
   const challenge = await conn.query('SELECT * FROM challenges WHERE id = ?', [challengeId])
   if (challenge.length === 0) {
-    await conn.end()
+    
     if (conn) conn.release()
     throw new HttpErrorRes("Invalid challenge", 400)
   }
@@ -30,7 +30,7 @@ export default async (challengeId: string, credential: WebauthnCred, userAgentSt
   // Find user by userHandle, then get Uid
   const user = await conn.query('SELECT * FROM users WHERE id = ?', [credential.response.userHandle])
   if (user.length === 0) {
-    await conn.end()
+    
     if (conn) conn.release()
     throw new HttpErrorRes("User not found", 404)
   }
@@ -39,7 +39,7 @@ export default async (challengeId: string, credential: WebauthnCred, userAgentSt
   const credentialId = Buffer.from(credential.rawId, 'base64').toString('base64')
   const authenticator = await conn.query('SELECT * FROM webauthn_credentials WHERE user = ? AND credential_id = ?', [user[0].id, credentialId])
   if (authenticator.length === 0) {
-    await conn.end()
+    
     if (conn) conn.release()
     throw new HttpErrorRes("Credential verification failed", 403)
   }
@@ -75,7 +75,7 @@ export default async (challengeId: string, credential: WebauthnCred, userAgentSt
     }
   })
   if (!verification.verified) {
-    await conn.end()
+    
     if (conn) conn.release()
     throw new HttpErrorRes("Credential verification failed", 403)
   }
@@ -101,7 +101,7 @@ export default async (challengeId: string, credential: WebauthnCred, userAgentSt
   const sessionId = uuid.v4()
 
   await conn.query('INSERT INTO sessions (id, user, token, created_at, annotate) VALUES (?,?,?,?,?)', [sessionId, user[0].id, hashedToken, new Date(), annotate])
-  await conn.end()
+  
   if (conn) conn.release()
   return {
     token: sessionToken,

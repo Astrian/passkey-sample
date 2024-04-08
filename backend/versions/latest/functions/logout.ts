@@ -11,6 +11,6 @@ export default async (session: string, uid: string) => {
   // Delete the session
   await conn.query('DELETE FROM sessions WHERE id = ? AND user = ?', [session, uid])
   
-  await conn.end()
+  
   if (conn) conn.release()
 }

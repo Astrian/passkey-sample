@@ -11,7 +11,7 @@ export default async (uid: string) => {
   // find the passkeys
   const rows = await conn.query('SELECT id, created_at, updated_at, annotate FROM webauthn_credentials WHERE user = ?', [uid])
 
-  await conn.end()
+  
   if (conn) conn.release()
 
   return rows

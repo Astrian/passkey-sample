@@ -22,7 +22,7 @@ export default async (authenticationInfo: string) => {
   // find the session
   const rows = await conn.query('SELECT * FROM sessions WHERE id = ?', [session])
   if (rows.length === 0) {
-    await conn.end()
+    
     if (conn) conn.release()
     throw new HttpErrorRes("Unauthorized access", 403)
   }
@@ -32,11 +32,11 @@ export default async (authenticationInfo: string) => {
 
   // check if token is correct, compare with hash
   if (!await argon2.verify(rows[0].token, token)) {
-    await conn.end()
+    
     if (conn) conn.release()
     throw new HttpErrorRes("Unauthorized access", 403)
   }
-  await conn.end()
+  
   if (conn) conn.release()
 
   return {
