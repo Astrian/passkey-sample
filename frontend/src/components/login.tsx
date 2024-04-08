@@ -5,6 +5,7 @@ import styles from "./login.module.scss"
 
 function Login(props: {refreshLogin: () => any}) {
   const [username, setUsername] = useState('')
+  const [tabStatus, setTabStatus] = useState('register' as 'register' | 'login')
 
   async function register() {
     try {
@@ -66,7 +67,7 @@ function Login(props: {refreshLogin: () => any}) {
     <button onClick={register}>Register</button>
     <hr />
   <button onClick={login}>Login</button>*/ }
-    <div className={styles.hero}>
+    { /*<div className={styles.hero}>
       <div className={styles.bgcolor}>
         <div className='container'>
           <div className={`${styles.intro}`}>
@@ -74,6 +75,23 @@ function Login(props: {refreshLogin: () => any}) {
             <p>With passkey, you can create and login to your account with ease. No need to “think”, remember or input complex passwords, just click and you are all set.</p>
             <p>For server-side, it also have multiple open-sourced libraries across different platforms and programming languages to help you to intergrate it to your website. It possibile that done it in one day by one developer.</p>
             <button>Give it a try!</button>
+          </div>
+        </div>
+      </div>
+</div> */}
+    <div>
+      <div className='container'>
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Interactive experience</h2>
+          <div className={styles.box}>
+            <ul className='tab'>
+              <li className={tabStatus === "register" ? "active" : ""}>
+                <button onClick={() => {setTabStatus("register")}}>Register</button>
+              </li>
+              <li className={tabStatus === "login" ? "active" : ""}>
+                <button onClick={() => {setTabStatus("login")}}>Login</button>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
