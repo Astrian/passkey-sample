@@ -35,6 +35,6 @@ export default async (authenticationInfo: string) => {
   } catch (error) {
     throw error
   } finally {
-    if (conn) await conn.release()
+    if (conn) conn.release()
   }
 }

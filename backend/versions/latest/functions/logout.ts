@@ -15,6 +15,6 @@ export default async (session: string, uid: string) => {
   } catch (error) {
     throw error
   } finally {
-    if (conn) await conn.release()
+    if (conn) conn.release()
   }
 }

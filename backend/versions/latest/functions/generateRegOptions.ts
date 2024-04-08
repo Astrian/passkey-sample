@@ -46,6 +46,6 @@ export default async (username: string) => {
   } catch (error) {
     throw error
   } finally {
-    if (conn) await conn.release()
+    if (conn) conn.release()
   }
 }

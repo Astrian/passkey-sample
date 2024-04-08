@@ -48,6 +48,6 @@ export default async (uid: string) => {
   } catch (error) {
     throw error
   } finally {
-    if (conn) await conn.release()
+    if (conn) conn.release()
   }
 }

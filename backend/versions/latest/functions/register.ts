@@ -19,11 +19,7 @@ export default async (credential: WebauthnCred, challengeId: string, uid: string
 
     // Get challenge
     const challenge = await conn.query('SELECT * FROM challenges WHERE id = ?', [challengeId])
-    if (challenge.length === 0) {
-
-      if (conn) await conn.release()
-      throw new HttpErrorRes("Invalid challenge", 400)
-    }
+    if (challenge.length === 0) throw new HttpErrorRes("Invalid challenge", 400)
 
     // Verify credential
     const verification = await verifyRegistrationResponse({
@@ -43,11 +39,7 @@ export default async (credential: WebauthnCred, challengeId: string, uid: string
       expectedRPID: process.env.RP_HOST || "localhost"
     })
 
-    if (!verification.verified) {
-
-      if (conn) await conn.release()
-      throw new HttpErrorRes("Credential verification failed", 400)
-    }
+    if (!verification.verified) throw new HttpErrorRes("Credential verification failed", 400)
 
     debug(verification)
 
@@ -77,6 +69,6 @@ export default async (credential: WebauthnCred, challengeId: string, uid: string
   } catch (error) {
     throw error
   } finally {
-    if (conn) await conn.release()
+    if (conn) conn.release()
   }
 }
