@@ -128,7 +128,7 @@ function Login(props: {refreshLogin: () => any}) {
             <h1>Passkey is the future of online identities.</h1>
             <p>With passkey, you can create and login to your account with ease. No need to “think”, remember or input complex passwords, just click and you are all set.</p>
             <p>For server-side, it also have multiple open-sourced libraries across different platforms and programming languages to help you to intergrate it to your website. It possibile that done it in one day by one developer.</p>
-            <button>Give it a try!</button>
+            <a href="#ie"><button>Give it a try!</button></a>
           </div>
         </div>
       </div>
@@ -137,7 +137,7 @@ function Login(props: {refreshLogin: () => any}) {
     
       <div className='container'>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Interactive experience</h2>
+          <h2 className={styles.sectionTitle} id="ie">Interactive Experience</h2>
           <div className={styles.box}>
             <ul className='tab'>
               <li className={tabStatus === "register" ? "active" : ""}>
@@ -174,6 +174,15 @@ function Login(props: {refreshLogin: () => any}) {
               <p>Passkey is an alternative authentication method to verify your identity. Compared to passwords, it is simple and easy to use and has exceptionally high security. You already have a passkey-enabled device if you have an iPhone (iOS 15 or higher) or an Android smartphone (Google Play Services supported).</p>
             </div>
             <div className={styles.question}>
+              <h3>What can I experience in this demo?</h3>
+                <p>You can create an account, log in and manage your account with passkey. Specifically:</p>
+                <ul>
+                  <li>Register with passkeys</li>
+                  <li>One-click log-in experience (no username needed)</li>
+                  <li>Adding and managing multiple passkeys with your account</li>
+                </ul>
+              </div>
+            <div className={styles.question}>
               <h3>Is it secure?</h3>
               <p>In a nutshell, a passkey is combined with two parts: a private key (held by you) and a public key (held by the server). When you log in to a website, the server will send the login challenge with the public key, which can only be resolved by the private key owner. Throughout the process, the private key is always kept in your hand.</p>
               <p>Hackers can do nothing throughout the process, including guessing the private key with the public key, which can be fetched public if the public key has leaked, fetching your private key if your network is bugged, or faking a challenge to cheat the server. That is why a passkey is considered a great alternative to a password.</p>
@@ -205,6 +214,7 @@ function Login(props: {refreshLogin: () => any}) {
               <h3>How about app developers?</h3>
                 <p>Apple and Google have their own guidance for supporting passkeys in your app. You can let users use the same passkey across the app and the web. For more information, check out the <a href="https://developer.apple.com/wwdc22/10092">Apple Developer Portal</a> and <a href="https://developers.google.com/identity/passkeys/developer-guides">Google Developer website</a>.</p>
               </div>
+              
           </div>
         </div>
       </div>
