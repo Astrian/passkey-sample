@@ -1,0 +1,28 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Serenity", sans-serif;
+}
+.container {
+  // center the container
+  margin: 0 auto;
+  //container width with media query
+  // FullHD width, 1408+ px
+  @media (min-width: 1408px) {
+    width: 1344px;
+  }
+  // 1216~1407px
+  @media (min-width: 1216px) and (max-width: 1407px) {
+    width: 1152px;
+  }
+  // 1024~1215px
+  @media (min-width: 1024px) and (max-width: 1215px) {
+    width: 960px;
+  }
+  // below 1024px, full width with 18px width padding
+  @media (max-width: 1023px) {
+    width: calc(100% - 36px);
+    padding: 0 18px;
+  }
+}
+

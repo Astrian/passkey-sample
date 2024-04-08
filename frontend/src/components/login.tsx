@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import {startRegistration, startAuthentication} from "@simplewebauthn/browser"
+import styles from "./login.module.scss"
 
 function Login(props: {refreshLogin: () => any}) {
   const [username, setUsername] = useState('')
@@ -61,10 +62,22 @@ function Login(props: {refreshLogin: () => any}) {
   }
 
   return( <>
-    <input value={username} onChange={usernameInput}/>
+    { /*<input value={username} onChange={usernameInput}/>
     <button onClick={register}>Register</button>
     <hr />
-    <button onClick={login}>Login</button>
+  <button onClick={login}>Login</button>*/ }
+    <div className={styles.hero}>
+      <div className={styles.bgcolor}>
+        <div className='container'>
+          <div className={`${styles.intro}`}>
+            <h1>Passkey is the future of online identities.</h1>
+            <p>With passkey, you can create and login to your account with ease. No need to “think”, remember or input complex passwords, just click and you are all set.</p>
+            <p>For server-side, it also have multiple open-sourced libraries across different platforms and programming languages to help you to intergrate it to your website. It possibile that done it in one day by one developer.</p>
+            <button>Give it a try!</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </>)
 }
 
