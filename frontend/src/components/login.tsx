@@ -92,6 +92,23 @@ function Login(props: {refreshLogin: () => any}) {
                 <button onClick={() => {setTabStatus("login")}}>Login</button>
               </li>
             </ul>
+
+            <div className={styles.interactiveexp}>
+              {
+                tabStatus === "register" ? (<>
+                  <div className={styles.form}>
+                    <input type='text' placeholder='username' value={username} onChange={usernameInput}/>
+                    <button disabled={username.length < 4} onClick={register}>Create Account</button>
+                    <div className={styles.annotate}>Use your browser profile, FIDO USB key, phone or supported password manager to create your account.</div>
+                  </div>
+                </>) : (<>
+                  <div className={styles.form}>
+                    <button onClick={login}>Login</button>
+                    <div className={styles.annotate}>Yes, even the username is not necessery!</div>
+                  </div>
+                </>)
+              }
+            </div>
           </div>
         </div>
       </div>
