@@ -120,6 +120,15 @@ function Login(props: {refreshLogin: () => any}) {
     setProcessing(false)
   }
 
+  async function keydownDetect(e: React.KeyboardEvent<HTMLInputElement>) {
+    // if enter key
+    if (e.key === 'Enter') {
+      if (tabStatus === "register") {
+        register()
+      }
+    }
+  }
+
   return( <>
     <ToastContainer
       position="top-right"
@@ -166,7 +175,7 @@ function Login(props: {refreshLogin: () => any}) {
                 tabStatus === "register" ? (<>
                   <div className={styles.form}>
                     { /* pattern: a-z, 0-9 and period character */}
-                    <input type='text' placeholder='username' value={username} onChange={usernameInput} disabled={processing} pattern='[a-z0-9\.]+'/>
+                    <input type='text' placeholder='username' value={username} onChange={usernameInput} disabled={processing} pattern='[a-z0-9\.]+' onKeyDown={keydownDetect}/>
                     <button disabled={username.length < 4 || processing} onClick={register}>Create Account</button>
                     <div className={styles.annotate}>
                       <p>Use your browser profile, FIDO USB key, phone or supported password manager to create your account.</p>
