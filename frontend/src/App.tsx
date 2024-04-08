@@ -34,9 +34,17 @@ function App() {
       setLoggined(false)
     })
   }
-
-  if (loggined) return (<User user={user} />)
-  else return (<Login refreshLogin={getUserInfo} />)
+  return (
+    <>
+      {
+        loggined ? (<User user={user} />) : (<Login refreshLogin={getUserInfo} />)
+      }
+      <div className="footer">
+        Develop by <a href="https://astrian.moe" target="_blank">Astrian</a> with love.
+        <br /><a href="https://github.com/Astrian/passkey-sample" target="_blank">Sourcecode</a>
+      </div>
+    </>
+  )
 }
 
 export default App
