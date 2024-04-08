@@ -17,7 +17,7 @@ export default async (username: string) => {
   const rows = await conn.query('SELECT * FROM users WHERE username = ?', [username])
   if (rows.length > 0 && rows[0].status === 1) {
     await conn.end()
-    await conn.release()
+    if (conn) conn.release()
     throw new HttpErrorRes("Username not available", 400)
   }
 
@@ -41,7 +41,7 @@ export default async (username: string) => {
   await conn.query('INSERT INTO users (id, username, email, status) VALUES (?, ?, ?, ?)', [uid, username, null, 0])
   
   await conn.end()
-  await conn.release()
+  if (conn) conn.release()
 
   return {
     challengeId: uuidChallenge,

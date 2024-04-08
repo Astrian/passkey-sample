@@ -14,7 +14,7 @@ export default async (passkeyId: string, uid: string) => {
   const passkeys = await conn.query('SELECT * FROM webauthn_credentials WHERE user = ?', [uid])
   if (passkeys.length < 2) {
     await conn.end()
-    await conn.release()
+    if (conn) conn.release()
     throw new HttpErrorRes("You must have at least 1 passkey", 400)
   }
 
@@ -22,12 +22,12 @@ export default async (passkeyId: string, uid: string) => {
   const passkey = await conn.query('SELECT * FROM webauthn_credentials WHERE id = ? AND user = ?', [passkeyId, uid])
   if (passkey.length === 0) {
     await conn.end()
-    await conn.release()
+    if (conn) conn.release()
     throw new HttpErrorRes("Passkey not found", 404)
   }
 
   // Delete the passkey
   await conn.query('DELETE FROM webauthn_credentials WHERE id = ?', [passkeyId])
   await conn.end()
-  await conn.release()
+  if (conn) conn.release()
 }

@@ -18,7 +18,7 @@ export default async (credential: WebauthnCred, challengeId: string, uid: string
   const challenge = await conn.query('SELECT * FROM challenges WHERE id = ?', [challengeId])
   if (challenge.length === 0) {
     await conn.end()
-  await conn.release()
+    if (conn) conn.release()
     throw new HttpErrorRes("Invalid challenge", 400)
   }
   debug("challenge ok")
@@ -43,7 +43,7 @@ export default async (credential: WebauthnCred, challengeId: string, uid: string
 
   if (!verification.verified) {
     await conn.end()
-  await conn.release()
+    if (conn) conn.release()
     throw new HttpErrorRes("Credential verification failed", 400)
   }
 
@@ -71,5 +71,5 @@ export default async (credential: WebauthnCred, challengeId: string, uid: string
   await conn.query('DELETE FROM challenges WHERE id = ?', [challengeId])
 
   await conn.end()
-  await conn.release()
+  if (conn) conn.release()
 }
