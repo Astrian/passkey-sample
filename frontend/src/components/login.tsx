@@ -14,6 +14,12 @@ function Login(props: {refreshLogin: () => any}) {
     let resOps: any
     setProcessing(true)
     try {
+      // check username
+      // [a-z|0-9|\.]{4, 24}
+      if (!/^[a-z0-9\.]{4,24}$/.test(username)) {
+        setProcessing(false)
+        return toast.error("Invalid username. Username must be 4-24 characters and only contain lowercase letters, numbers and period.")
+      }
       // Get challenge and options
       resOps = await axios.get(`https://${import.meta.env.VITE_BACKEND}/registeroptions?username=${username}`)
     } catch (e) {
@@ -152,14 +158,15 @@ function Login(props: {refreshLogin: () => any}) {
               {
                 tabStatus === "register" ? (<>
                   <div className={styles.form}>
-                    <input type='text' placeholder='username' value={username} onChange={usernameInput} disabled={processing}/>
+                    { /* pattern: a-z, 0-9 and period character */}
+                    <input type='text' placeholder='username' value={username} onChange={usernameInput} disabled={processing} pattern='[a-z0-9\.]+'/>
                     <button disabled={username.length < 4 || processing} onClick={register}>Create Account</button>
                     <div className={styles.annotate}>Use your browser profile, FIDO USB key, phone or supported password manager to create your account.</div>
                   </div>
                 </>) : (<>
                   <div className={styles.form}>
                     <button onClick={login} disabled={processing}>Login</button>
-                    <div className={styles.annotate}>Yes, even the username is not necessery!</div>
+                    <div className={styles.annotate}>Yes, even the username is not necessary!</div>
                   </div>
                 </>)
               }

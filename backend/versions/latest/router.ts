@@ -35,6 +35,10 @@ router.get("/registeroptions", async (ctx) => {
   try {
     // get username from query
     const username: string = (ctx.request.query.username as string).toLowerCase() // Cast the username to string
+    // check username
+    if (!username) throw new HttpErrorRes("Username cannot be empty", 400)
+    // [a-z|0-9|\.]{4, 24}
+    if (!username.match(/^[a-z0-9\.]{4,24}$/)) throw new HttpErrorRes("Invalid username", 400)
     ctx.body = await functions.generateRegOptions(username)
   } catch (e: any) {
     if (e instanceof HttpErrorRes) {
