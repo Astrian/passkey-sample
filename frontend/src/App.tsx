@@ -3,10 +3,12 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Login from './components/login'
 import User from './components/user'
+import { useTranslation } from 'react-i18next'
 
 function App() {
   const [loggined, setLoggined] = useState(false)
   const [user, setUser] = useState({} as {username: string} | null)
+  const {t} = useTranslation()
 
   // Check if user is loggined on page load
   useEffect(() => {

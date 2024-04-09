@@ -4,11 +4,13 @@ import {startRegistration, startAuthentication} from "@simplewebauthn/browser"
 import styles from "./login.module.scss"
 import { ToastContainer, toast, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useTranslation } from 'react-i18next'
 
 function Login(props: {refreshLogin: () => any}) {
   const [username, setUsername] = useState('')
   const [tabStatus, setTabStatus] = useState('register' as 'register' | 'login')
   const [processing, setProcessing] = useState(false)
+  const {t} = useTranslation()
 
   async function register() {
     let resOps: any
@@ -147,10 +149,10 @@ function Login(props: {refreshLogin: () => any}) {
       <div className={styles.bgcolor}>
         <div className='container'>
           <div className={`${styles.intro}`}>
-            <h1>Passkey is the future of online identities.</h1>
-            <p>With passkey, you can create and login to your account with ease. No need to “think”, remember or input complex passwords, just click and you are all set.</p>
-            <p>For server-side, it also have multiple open-sourced libraries across different platforms and programming languages to help you to intergrate it to your website. It possibile that done it in one day by one developer.</p>
-            <a href="#ie"><button>Give it a try!</button></a>
+            <h1>{t('hero_title')}</h1>
+            <p>{t('hero_p1')}</p>
+            <p>{t('hero_p2')}</p>
+            <a href="#ie"><button>{t('hero_btn')}</button></a>
           </div>
         </div>
       </div>
