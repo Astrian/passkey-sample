@@ -1,16 +1,21 @@
 import axios, { AxiosError } from 'axios'
 import { useEffect, useState } from 'react'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { startRegistration } from '@simplewebauthn/browser'
 import style from './user.module.scss'
 import { ToastContainer, toast, Slide } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import 'dayjs/locale/en'
+import 'dayjs/locale/zh-cn'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 function User(props: {user: {username: string} | null}) {
   const [passkeys, setPasskeys] = useState([])
   const [refreshingPasskeys, setRefreshingPasskeys] = useState(false)
   useEffect(() => {
     refreshPasskeys()
+    dayjs.extend(relativeTime)
+    dayjs.locale(navigator.language.toLowerCase() || 'en')
   }, [])
 
   const { t } = useTranslation()
@@ -21,8 +26,8 @@ function User(props: {user: {username: string} | null}) {
         return (<div className={style.passkeyitem} key={passkey.id}>
           <div className={style.left}>
             <div className={style.passkeyname}>{passkey.annotate || t('passkeylist_default_name')}</div>
-            <div className={style.info}>{t('passkeylist_createdat')} {moment(passkey.created_at).fromNow()}</div>
-            <div className={style.info}>{t('passkeylist_lastusedat')} {moment(passkey.updated_at).fromNow()}</div>
+            <div className={style.info}>{t('passkeylist_createdat')} {dayjs(passkey.created_at).fromNow()}</div>
+            <div className={style.info}>{t('passkeylist_lastusedat')} {dayjs(passkey.updated_at).fromNow()}</div>
           </div>
           <div className={style.right}>
             <button onClick={() => revokePasskey(passkey.id)}>{t('passkeylist_revoke_btn')}</button>
