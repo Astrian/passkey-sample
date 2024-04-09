@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Login from './components/login'
 import User from './components/user'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 
 function App() {
   const [loggined, setLoggined] = useState(false)
@@ -42,8 +42,9 @@ function App() {
         loggined ? (<User user={user} />) : (<Login refreshLogin={getUserInfo} />)
       }
       <div className="footer">
-        Develop by <a href="https://astrian.moe" target="_blank">Astrian</a> with love.
-        <br /><a href="https://github.com/Astrian/passkey-sample" target="_blank">Sourcecode</a>
+        <Trans i18nKey="footer_p1"><a href="https://astrian.moe" target="_blank">Astrian</a></Trans>
+        <br />
+        <a href="https://github.com/Astrian/passkey-sample" target="_blank">{t('footer_p2')}</a>
       </div>
     </>
   )

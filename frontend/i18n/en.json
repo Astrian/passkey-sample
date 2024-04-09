@@ -36,5 +36,7 @@
   "sec2_a8_p1": "In most cases, using an open-source library is encouraged. For the frequent changes of WebAuthn, the fundamental technology of passkey, the open-source library can help you make the integrated process more straightforward, and you can avoid most security exposures.",
   "sec2_a8_p2": "For Node.js, you can add passkey support with <0>@simplewebauthn</0> (used by this project!). There are also many other libraries for different programming languages.",
   "sec2_q9": "How about app deveopers?",
-  "sec2_a9": "Apple and Google have their own guidance for supporting passkeys in your app. You can let users use the same passkey across the app and the web. For more information, check out the <0>Apple Developer Portal</0> and <1>Google Developer website</1>"
+  "sec2_a9": "Apple and Google have their own guidance for supporting passkeys in your app. You can let users use the same passkey across the app and the web. For more information, check out the <0>Apple Developer Portal</0> and <1>Google Developer website</1>",
+  "footer_p1": "Develop by <0>Astrian</0> with love.",
+  "footer_p2": "Sourcecode"
 }
