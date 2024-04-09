@@ -161,14 +161,14 @@ function Login(props: {refreshLogin: () => any}) {
     
       <div className='container'>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle} id="ie">Interactive Experience</h2>
+          <h2 className={styles.sectionTitle} id="ie">{t('sec1_title')}</h2>
           <div className={styles.box}>
             <ul className='tab'>
               <li className={tabStatus === "register" ? "active" : ""}>
-                <button onClick={() => {setTabStatus("register")}}>Register</button>
+                <button onClick={() => {setTabStatus("register")}}>{t('sec1_tab_reg')}</button>
               </li>
               <li className={tabStatus === "login" ? "active" : ""}>
-                <button onClick={() => {setTabStatus("login")}}>Login</button>
+                <button onClick={() => {setTabStatus("login")}}>{t('sec1_tab_login')}</button>
               </li>
             </ul>
 
@@ -178,16 +178,16 @@ function Login(props: {refreshLogin: () => any}) {
                   <div className={styles.form}>
                     { /* pattern: a-z, 0-9 and period character */}
                     <input type='text' placeholder='username' value={username} onChange={usernameInput} disabled={processing} pattern='[a-z0-9\.]+' onKeyDown={keydownDetect}/>
-                    <button disabled={username.length < 4 || processing} onClick={register}>Create Account</button>
+                    <button disabled={username.length < 4 || processing} onClick={register}>{t('sec1_creacc_btn')}</button>
                     <div className={styles.annotate}>
-                      <p>Use your browser profile, FIDO USB key, phone or supported password manager to create your account.</p>
-                      <p>Only lowercase letters, numbers and period are vaild.</p>
+                      <p>{t('sec1_anote_p1')}</p>
+                      <p>{t('sec1_anote_p2')}</p>
                     </div>
                   </div>
                 </>) : (<>
                   <div className={styles.form}>
-                    <button onClick={login} disabled={processing}>Login</button>
-                    <div className={styles.annotate}>Yes, even the username is not necessary!</div>
+                    <button onClick={login} disabled={processing}>{t('sec1_login_btn')}</button>
+                    <div className={styles.annotate}>{t('sec1_login_ante')}</div>
                   </div>
                 </>)
               }

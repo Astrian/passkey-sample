@@ -2,5 +2,13 @@
   "hero_title": "Passkey is the future of online identities.",
   "hero_p1": "With passkey, you can create and login to your account with ease. No need to set, remember or input complex passwords, just click and you are all set.",
   "hero_p2": "For server-side, it also have multiple open-sourced libraries across different platforms and programming languages to help you to intergrate it to your website. It possibile that done it in one day by one developer.",
-  "hero_btn": "Give it a try!"
+  "hero_btn": "Give it a try!",
+  "sec1_title": "Interactive Experience",
+  "sec1_tab_reg": "Register",
+  "sec1_tab_login": "Log in",
+  "sec1_creacc_btn": "Create Account",
+  "sec1_anote_p1": "Use your browser profile, FIDO USB key, phone or supported password manager to create your account.",
+  "sec1_anote_p2": "Only lowercase letters, numbers and period are vaild.",
+  "sec1_login_btn": "Log in",
+  "sec1_login_ante": "Yes, even the username is not necessary!"
 }
