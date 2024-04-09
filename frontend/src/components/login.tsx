@@ -4,7 +4,7 @@ import {startRegistration, startAuthentication} from "@simplewebauthn/browser"
 import styles from "./login.module.scss"
 import { ToastContainer, toast, Slide } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 
 function Login(props: {refreshLogin: () => any}) {
   const [username, setUsername] = useState('')
@@ -195,53 +195,53 @@ function Login(props: {refreshLogin: () => any}) {
           </div>
         </div>
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Frequent Asked Questions</h2>
+          <h2 className={styles.sectionTitle}>{t('sec2_title')}</h2>
           <div className={styles.qna}>
             <div className={styles.question}>
-              <h3>What is passkey?</h3>
-              <p>Passkey is an alternative authentication method to verify your identity. Compared to passwords, it is simple and easy to use and has exceptionally high security. You already have a passkey-enabled device if you have an iPhone (iOS 15 or higher) or an Android smartphone (Google Play Services supported).</p>
+              <h3>{t('sec2_q1')}</h3>
+              <p>{t('sec2_a1')}</p>
             </div>
             <div className={styles.question}>
-              <h3>What can I experience in this demo?</h3>
-                <p>You can create an account, log in and manage your account with passkey. Specifically:</p>
+              <h3>{t('sec2_q2')}</h3>
+                <p>{t('sec2_a2_p')}</p>
                 <ul>
-                  <li>Register with passkeys</li>
-                  <li>One-click log-in experience (no username needed)</li>
-                  <li>Adding and managing multiple passkeys with your account</li>
+                  <li>{t('sec2_a2_l1')}</li>
+                  <li>{t('sec2_a2_l2')}</li>
+                  <li>{t('sec2_a2_l3')}</li>
                 </ul>
               </div>
             <div className={styles.question}>
-              <h3>Is it secure?</h3>
-              <p>In a nutshell, a passkey is combined with two parts: a private key (held by you) and a public key (held by the server). When you log in to a website, the server will send the login challenge with the public key, which can only be resolved by the private key owner. Throughout the process, the private key is always kept in your hand.</p>
-              <p>Hackers can do nothing throughout the process, including guessing the private key with the public key, which can be fetched public if the public key has leaked, fetching your private key if your network is bugged, or faking a challenge to cheat the server. That is why a passkey is considered a great alternative to a password.</p>
-              <p>However, cyber security is a massive project for everyone, no matter who you are. The passkey is only part of security, so make sure you have a good habit of using the Internet.</p>
+              <h3>{t('sec2_q3')}</h3>
+              <p>{t('sec2_a3_p1')}</p>
+              <p>{t('sec2_a3_p2')}</p>
+              <p>{t('sec2_a3_p3')}</p>
             </div>
             <div className={styles.question}>
-              <h3>Is, it, secure - give me a tl;dr!</h3>
-              <p>The passkey is not secure for you if you cannot keep your passkey secure. The basic requirement for using a passkey to secure your account is that you secure your USB key or phone, which includes your passkeys, by a strong PIN.</p>
+              <h3>{t('sec2_q4')}</h3>
+              <p>{t('sec2_a4')}</p>
             </div>
             <div className={styles.question}>
-              <h3>Which services support passkey?</h3>
-              <p>The 1Password team is maintaining a list of all service support passkeys. <a href="https://passkeys.directory/" target='_blank'>See here</a>.</p>
+              <h3>{t('sec2_q5')}</h3>
+              <p><Trans i18nKey="sec2_a5"><a href="https://passkeys.directory/" target="_blank">See here</a></Trans></p>
             </div>
             <div className={styles.question}>
-              <h3>How can I use passkey if the website supports it?</h3>
-              <p>The easiest way to add a passkey to your account is to use your browser profile or the credential manager provided by your operating system. However, you can also put your passkey on your FIDO-enabled USB key or supported password managers. In most cases, the USB key or password manager can help you use your passkey across different devices.</p>
+              <h3>{t('sec2_q6')}</h3>
+              <p>{t('sec2_a6')}</p>
             </div>
             <div className={styles.question}>
-              <h3>Can passkey be used if a website does not support it directly?</h3>
-              <p>If this website has a 2-factor authentication option called “hardware USB key,” you can use a passkey to replace the actual hardware USB key in most cases. In practice, Mastodon, Fastmail, Twitter (X), Cloudflare, Facebook, and AWS have supported the use of a passkey as a 2-factor authentication.</p>
-              <p>The only downside is you cannot remove your account password, and you still need to input it each time you log in. However, using a passkey to alternate TOTP can improve the security level of your account.</p>
+              <h3>{t('sec2_q7')}</h3>
+              <p>{t('sec2_a7_p1')}</p>
+              <p>{t('sec2_a7_p2')}</p>
             </div>
             <div className={styles.question}>
-              <h3>How can I integrate passkey into my website?</h3>
-              <p>In most cases, using an open-source library is encouraged. For the frequent changes of WebAuthn, the fundamental technology of passkey, the open-source library can help you make the integrated process more straightforward, and you can avoid most security exposures.</p>
-              <p>For Node.js, you can add passkey support with <a href="https://simplewebauthn.dev/" target='_blank'>@simplewebauthn</a> (used by this project!). There are also many other libraries for different programming languages.</p>
+              <h3>{t('sec2_q8')}</h3>
+              <p>{t('sec2_a8_p1')}</p>
+              <p><Trans i18nKey="sec2_a8_p2"><a href="https://simplewebauthn.dev/" target='_blank'>@simplewebauthn</a></Trans></p>
             </div>
             <div className={styles.question}>
-              <h3>How about app developers?</h3>
-                <p>Apple and Google have their own guidance for supporting passkeys in your app. You can let users use the same passkey across the app and the web. For more information, check out the <a href="https://developer.apple.com/wwdc22/10092">Apple Developer Portal</a> and <a href="https://developers.google.com/identity/passkeys/developer-guides">Google Developer website</a>.</p>
-              </div>
+              <h3>{t('sec2_q9')}</h3>
+              <p><Trans i18nKey="sec2_a9"><a href="https://developer.apple.com/wwdc22/10092">Apple Developer Portal</a><a href="https://developers.google.com/identity/passkeys/developer-guides">Google Developer website</a></Trans></p>
+            </div>
               
           </div>
         </div>
