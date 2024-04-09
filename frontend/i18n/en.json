@@ -38,5 +38,15 @@
   "sec2_q9": "How about app deveopers?",
   "sec2_a9": "Apple and Google have their own guidance for supporting passkeys in your app. You can let users use the same passkey across the app and the web. For more information, check out the <0>Apple Developer Portal</0> and <1>Google Developer website</1>",
   "footer_p1": "Develop by <0>Astrian</0> with love.",
-  "footer_p2": "Sourcecode"
+  "footer_p2": "Sourcecode",
+  "passkeylist_revoke_btn": "Revoke",
+  "passkeylist_cgaot_btn": "Change annotate",
+  "passkeylist_title": "My passkeys",
+  "passkeylist_new_btn": "Assign a passkey",
+  "passkeylist_default_name": "Passkey",
+  "passkeylist_createdat": "Create at",
+  "passkeylist_lastusedat": "Last used at",
+  "passkeylist_confirmrevoke": "You will no longer be able to log in with this passkey. The passkey on device will remain and you need to remove it manually.",
+  "passkeylist_changeannotate": "Change annotate for this passkey to help you distinguish:",
+  "passkeylist_changeannotate_empty": "Passkey annotate cannot be empty."
 }

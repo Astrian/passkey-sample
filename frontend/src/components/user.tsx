@@ -4,6 +4,7 @@ import moment from 'moment'
 import { startRegistration } from '@simplewebauthn/browser'
 import style from './user.module.scss'
 import { ToastContainer, toast, Slide } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 function User(props: {user: {username: string} | null}) {
   const [passkeys, setPasskeys] = useState([])
@@ -12,18 +13,20 @@ function User(props: {user: {username: string} | null}) {
     refreshPasskeys()
   }, [])
 
+  const { t } = useTranslation()
+
   function listPasskeys() {
     return (<>
       { passkeys.map((passkey: { id: string, created_at: string, updated_at: string, annotate: string }) => {
         return (<div className={style.passkeyitem} key={passkey.id}>
           <div className={style.left}>
-            <div className={style.passkeyname}>{passkey.annotate || "Passkey"}</div>
-            <div className={style.info}>Created at {moment(passkey.created_at).fromNow()}</div>
-            <div className={style.info}>Last used at {moment(passkey.updated_at).fromNow()}</div>
+            <div className={style.passkeyname}>{passkey.annotate || t('passkeylist_default_name')}</div>
+            <div className={style.info}>{t('passkeylist_createdat')} {moment(passkey.created_at).fromNow()}</div>
+            <div className={style.info}>{t('passkeylist_lastusedat')} {moment(passkey.updated_at).fromNow()}</div>
           </div>
           <div className={style.right}>
-            <button onClick={() => revokePasskey(passkey.id)}>Revoke</button>
-            <button onClick={() => changeAnnotate(passkey.id)}>Change annotate</button>
+            <button onClick={() => revokePasskey(passkey.id)}>{t('passkeylist_revoke_btn')}</button>
+            <button onClick={() => changeAnnotate(passkey.id)}>{t('passkeylist_cgaot_btn')}</button>
           </div>
         </div>)
       }) }
@@ -93,7 +96,7 @@ function User(props: {user: {username: string} | null}) {
 
   async function revokePasskey(id: string) {
     try {
-      if (!await confirm('Are you sure to revoke this passkey?')) return
+      if (!await confirm(t('passkeylist_confirmrevoke'))) return
       setRefreshingPasskeys(true)
       await axios.delete(`https://${import.meta.env.VITE_BACKEND}/users/me/passkeys/${id}`, {
         headers: {
@@ -115,8 +118,9 @@ function User(props: {user: {username: string} | null}) {
   }
 
   async function changeAnnotate(id: string) {
-    const annotate = prompt('Enter new annotate')
-    if (!annotate) return toast.error('Annotate cannot be empty')
+    const annotate = prompt(t("passkeylist_changeannotate"))
+    if (annotate === null) return
+    if (annotate === '') return toast.error(t("passkeylist_changeannotate_empty"))
     setRefreshingPasskeys(true)
     try {
       await axios.patch(`https://${import.meta.env.VITE_BACKEND}/users/me/passkeys/${id}/annotate`, {
@@ -150,8 +154,6 @@ function User(props: {user: {username: string} | null}) {
       alert('Error: ' + e)
     }
   }
-
-
   
   return(<>
     <ToastContainer
@@ -179,8 +181,8 @@ function User(props: {user: {username: string} | null}) {
       <div className="container">
         <div className={style.section}>
           <div className={style.sectiontitle}>
-            <h2>My passkeys</h2>
-            <button onClick={assignPasskey} disabled={refreshingPasskeys}>Assign new passkey</button>
+            <h2>{t('passkeylist_title')}</h2>
+            <button onClick={assignPasskey} disabled={refreshingPasskeys}>{t('passkeylist_new_btn')}</button>
           </div>
             {refreshingPasskeys ? <>Loading...</> : listPasskeys()}
         </div>

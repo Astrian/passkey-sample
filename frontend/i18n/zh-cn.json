@@ -38,5 +38,15 @@
   "sec2_q9": "App 开发呢？",
   "sec2_a9": "Apple 和 Google 都有各自平台对应的在 app 中支持通行密钥体验的文档，还能让用户在 app 和网页中使用同一个通行密钥。详情可查阅 <0>Apple 开发者官网</0> 和 <1>Google 开发者官网</1>",
   "footer_p1": "由 <0>Astrian</0> 用爱开发",
-  "footer_p2": "源代码地址"
+  "footer_p2": "源代码地址",
+  "passkeylist_revoke_btn": "移除",
+  "passkeylist_cgaot_btn": "更改说明",
+  "passkeylist_title": "我的通行密钥",
+  "passkeylist_new_btn": "添加新密钥",
+  "passkeylist_default_name": "通行密钥",
+  "passkeylist_createdat": "创建于",
+  "passkeylist_lastusedat": "上次使用于",
+  "passkeylist_confirmrevoke": "你将无法使用这个通行密钥登录至此帐户，同时需要手动移除你自己的通行密钥。",
+  "passkeylist_changeannotate": "更改通行密钥的说明，以便区分：",
+  "passkeylist_changeannotate_empty": "通行密钥说明不能为空。"
 }
