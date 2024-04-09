@@ -1,5 +1,8 @@
 .navbar {
+  position: fixed;
   height: 60px;
+  width: 100%;
+  top: 0px;
   background: linear-gradient(to top, rgba(34, 224, 183, 1), rgba(55, 152, 208, 1));
   color: white;
   display: flex;
@@ -33,7 +36,7 @@
   .section {
     max-width: 800px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 60px;
     .sectiontitle {
       display: flex;
       align-items: center;
