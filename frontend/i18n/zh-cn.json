@@ -48,5 +48,8 @@
   "passkeylist_lastusedat": "上次使用于",
   "passkeylist_confirmrevoke": "你将无法使用这个通行密钥登录至此帐户，同时需要手动移除你自己的通行密钥。",
   "passkeylist_changeannotate": "更改通行密钥的说明，以便区分：",
-  "passkeylist_changeannotate_empty": "通行密钥说明不能为空。"
+  "passkeylist_changeannotate_empty": "通行密钥说明不能为空。",
+  "website_name": "通行密钥体验",
+  "nav_logout_btn": "登出",
+  "confirm_logout_alert": "你将在此浏览器中退出登录，并返回主页。"
 }

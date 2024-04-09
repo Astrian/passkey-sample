@@ -48,5 +48,8 @@
   "passkeylist_lastusedat": "Last used at",
   "passkeylist_confirmrevoke": "You will no longer be able to log in with this passkey. The passkey on device will remain and you need to remove it manually.",
   "passkeylist_changeannotate": "Change annotate for this passkey to help you distinguish:",
-  "passkeylist_changeannotate_empty": "Passkey annotate cannot be empty."
+  "passkeylist_changeannotate_empty": "Passkey annotate cannot be empty.",
+  "website_name": "Try Passkey",
+  "nav_logout_btn": "Log out",
+  "confirm_logout_alert": "You will log out in this browser and back to the home page."
 }

@@ -146,7 +146,7 @@ function User(props: {user: {username: string} | null}) {
 
   async function logout() {
     try {
-      if(!confirm('Are you sure to logout?')) return
+      if(!confirm(t('confirm_logout_alert'))) return
       await axios.delete(`https://${import.meta.env.VITE_BACKEND}/sessions/now`, {
         headers: {
           Authorization: `Basic ${btoa(localStorage.getItem('session') || '')}`
@@ -177,9 +177,9 @@ function User(props: {user: {username: string} | null}) {
     <div className={style.navbar}>
       <div className={`container ${style.navbarcontent}`}>
         <div className={style.websitename}>
-          Try Passkey
+          {t('website_name')}
         </div>
-        <div className={style.right}>{props.user?.username} · <button onClick={logout}>Log out</button></div>
+        <div className={style.right}>{props.user?.username} · <button onClick={logout}>{t('nav_logout_btn')}</button></div>
       </div>
     </div>  
     <div className={style.body}>
